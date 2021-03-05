@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+  <link rel="stylesheet" href="./assets/styles.css">
+
+  <title>Weather Dashboard</title>
+</head>
+
+<body>
+  <div class="container-flex">
+    <div class="row">
+      <div class="col col-sm-12 col-md-12 col-lg-12">
+        <header>Weather Dashboard</header>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col col-sm-4 col-md-4 col-lg-4">
+        <section class="search-history">
+          <div class="row">
+            <div class="col col-sm-12 col-md-12 col-lg-12 search-form">
+              <form class="row g-3" id="city-search">
+                <div class="col-sm-2 col-md-2 col-lg-2">
+                  <label for="search-label" class="visually-hidden">Email</label>
+                  <input type="text" readonly class="form-control-plaintext" id="search-label" value="City:">
+                </div>
+                <div class="col-sm-8 col-md-8 col-lg-8">
+                  <label for="city-name-search" class="visually-hidden">City Name</label>
+                  <input type="text" class="form-control" id="city-name-search" placeholder="City Name">
+                </div>
+                <div class="col-sm-2 col-md-2 col-lg-2">
+                  <button type="submit" class="btn btn-primary mb-3">Search</button>
+                </div>
+              </form>
+
+
+            </div>
+
+          </div>
+
+
+        </section>
+      </div>
+      <div class="col col-sm-8 col-md-8 col-lg-8 aside">
+        <section class="city-forecast">
+          <div class="row">
+            <div class="col col-sm-12 col-md-12 col-lg-12" id="current-block">
+
+            </div>
+          </div>
+          <div class="row">
+            <div class="col col-sm-12 col-md-12 col-lg-12" id="forecast-block">
+
+            </div>
+          </div>
+
+        </section>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
