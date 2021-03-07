@@ -11,7 +11,6 @@ function submitCity(event) {
   cityName = cityNameEl.value.trim();
   if (cityName) {
     getCurrentWeather(cityName);
-    console.log(cityName);
   }
 }
 
@@ -34,7 +33,7 @@ function getCurrentWeather(city) {
           getForecast(lat, lon);
 
           // console.log(data.weather[0].main);
-          document.querySelector('#city-date').textContent = data.name;
+          document.querySelector('#city-date').textContent = data.name + ' ' + moment(data.dt * 1000).format('MM/DD/YYYY');
           document.querySelector('#wicon').setAttribute('src', 'http://openweathermap.org/img/w/' + data.weather[0].icon + '.png');
           document.querySelector('#wicon').setAttribute('alt', data.weather[0].description);
           // document.querySelector('#current-temp').textContent = 'Temperature: ' + data.main.temp;
@@ -78,31 +77,71 @@ function getForecast(lat, lon) {
 }
 
 function renderForecast(array) {
-  for (var i = 0; i < 5; i++) {
-    var dayBlock = document.createElement('div');
-    dayBlock.className = 'col col-sm-12 col-md-6 col-lg-2';
-    forecastEl.appendChild(dayBlock);
-    var dayList = document.createElement('ul');
-    dayBlock.appendChild(dayList);
-    var dayDate= document.createElement('li');
-    dayDate.textContent = array[i].dt;
-    dayList.appendChild(dayDate);
-    var dayMain = document.createElement('li');
-    dayList.appendChild(dayMain);
-    var dayIcon = document.createElement('img');
-    dayIcon.setAttribute('src', 'http://openweathermap.org/img/w/' + array[i].weather[0].icon + '.png');
-    dayIcon.setAttribute('alt', array[i].weather[0].description);
-    dayMain.appendChild(dayIcon);
-    var dayTemp = document.createElement('li');
-    dayTemp.textContent = array[i].temp.day + '°F';
-    dayList.appendChild(dayTemp);
-    dayHumidity = document.createElement('li');
-    dayHumidity.textContent = 'Humidity: ' + array[i].humidity + '%';
-    dayList.appendChild(dayHumidity);
 
+  for (var i = 0; i < 5; i++) {
+
+    forecastEl.children[i].children[0].children[0].textContent = moment(array[i].dt * 1000).format('MM/DD/YY');
+    forecastEl.children[i].children[0].children[1].children[0].setAttribute('src','http://openweathermap.org/img/w/' + array[i].weather[0].icon + '.png' );
+    forecastEl.children[i].children[0].children[1].children[0].setAttribute('alt',  array[i].weather[0].description);
+    forecastEl.children[i].children[0].children[2].textContent = array[i].temp.day + '°F';
+    forecastEl.children[i].children[0].children[3].textContent = 'Humidity: ' + array[i].humidity + '%';
+    //   renderBlocks();
+    //   dayMain.removeChild(dayIcon);
+    //   dayList.removeChild(dayHumidity);
+    //   dayList.removeChild(dayTemp);
+    //   dayList.removeChild(dayMain);
+    //   dayList.removeChild(dayDate);
+    //   dayBlock.removeChild(dayList);
+    //   forecastEl.removeChild(dayBlock);
+    // } else {
     
+    //   renderBlocks();
+    // }
+    // function deleteBlocks() {
+      
+    // }
+    // function renderBlocks() {
+    //   var dayBlock = document.createElement('div');
+    //   dayBlock.className = 'col col-sm-12 col-md-6 col-lg-2';
+    //   // forecastEl.removeChild(dayBlock);
+    //   forecastEl.appendChild(dayBlock);
+
+    //   var dayList = document.createElement('ul');
+    //   // dayBlock.removeChild(dayList);
+    //   dayBlock.appendChild(dayList);
+
+    //   var dayDate = document.createElement('li');
+    //   dayDate.textContent = moment(array[i].dt * 1000).format('MM/DD/YY');
+    //   // dayList.removeChild(dayDate);
+    //   dayList.appendChild(dayDate);
+
+    //   var dayMain = document.createElement('li');
+    //   // dayList.removeChild(dayMain);
+    //   dayList.appendChild(dayMain);
+
+    //   var dayIcon = document.createElement('img');
+    //   dayIcon.setAttribute('src', 'http://openweathermap.org/img/w/' + array[i].weather[0].icon + '.png');
+    //   dayIcon.setAttribute('alt', array[i].weather[0].description);
+    //   // dayMain.removeChild(dayIcon);
+    //   dayMain.appendChild(dayIcon);
+
+    //   var dayTemp = document.createElement('li');
+    //   dayTemp.textContent = array[i].temp.day + '°F';
+    //   // dayList.removeChild(dayTemp);
+    //   dayList.appendChild(dayTemp);
+
+    //   dayHumidity = document.createElement('li');
+    //   dayHumidity.textContent = 'Humidity: ' + array[i].humidity + '%';
+    //   // dayList.removeChild(dayHumidity);
+    //   dayList.appendChild(dayHumidity);
+
+
+    // }
   }
 }
+
+
+
 //renderCities function to print city buttons below search bar
 // function storeCities(city) {
 //   var cityList = [];
