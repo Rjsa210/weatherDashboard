@@ -32,14 +32,10 @@ function getCurrentWeather(city) {
           var lat = data.coord.lat;
           getForecast(lat, lon);
 
-          // console.log(data.weather[0].main);
           document.querySelector('#city-date').textContent = data.name + ' ' + moment(data.dt * 1000).format('MM/DD/YYYY');
           document.querySelector('#wicon').setAttribute('src', 'http://openweathermap.org/img/w/' + data.weather[0].icon + '.png');
           document.querySelector('#wicon').setAttribute('alt', data.weather[0].description);
-          // document.querySelector('#current-temp').textContent = 'Temperature: ' + data.main.temp;
-          // document.querySelector('#current-humidity').textContent = 'Humidity: ' + data.main.humidity;
-          // document.querySelector('#wind-speed').textContent = 'Wind Speed: ' + data.wind.speed;
-          // document.querySelector('#UV-index').textContent = 'UV Index: ';//need uv index
+        
         });
       } else {
         alert('Error: ' + response.statusText);
@@ -52,7 +48,6 @@ function getCurrentWeather(city) {
 
 function getForecast(lat, lon) {
   var forecastURL = 'https://api.openweathermap.org/data/2.5/onecall?lat=' + lat + '&lon=' + lon + '&exclude=hourly,minutely&units=imperial&appid=' + apiKey;
-  console.log('so he rented a flat on the lower east side... of ');
 
   fetch(forecastURL)
     .then(function (response) {
@@ -85,58 +80,7 @@ function renderForecast(array) {
     forecastEl.children[i].children[0].children[1].children[0].setAttribute('alt',  array[i].weather[0].description);
     forecastEl.children[i].children[0].children[2].textContent = array[i].temp.day + '°F';
     forecastEl.children[i].children[0].children[3].textContent = 'Humidity: ' + array[i].humidity + '%';
-    //   renderBlocks();
-    //   dayMain.removeChild(dayIcon);
-    //   dayList.removeChild(dayHumidity);
-    //   dayList.removeChild(dayTemp);
-    //   dayList.removeChild(dayMain);
-    //   dayList.removeChild(dayDate);
-    //   dayBlock.removeChild(dayList);
-    //   forecastEl.removeChild(dayBlock);
-    // } else {
     
-    //   renderBlocks();
-    // }
-    // function deleteBlocks() {
-      
-    // }
-    // function renderBlocks() {
-    //   var dayBlock = document.createElement('div');
-    //   dayBlock.className = 'col col-sm-12 col-md-6 col-lg-2';
-    //   // forecastEl.removeChild(dayBlock);
-    //   forecastEl.appendChild(dayBlock);
-
-    //   var dayList = document.createElement('ul');
-    //   // dayBlock.removeChild(dayList);
-    //   dayBlock.appendChild(dayList);
-
-    //   var dayDate = document.createElement('li');
-    //   dayDate.textContent = moment(array[i].dt * 1000).format('MM/DD/YY');
-    //   // dayList.removeChild(dayDate);
-    //   dayList.appendChild(dayDate);
-
-    //   var dayMain = document.createElement('li');
-    //   // dayList.removeChild(dayMain);
-    //   dayList.appendChild(dayMain);
-
-    //   var dayIcon = document.createElement('img');
-    //   dayIcon.setAttribute('src', 'http://openweathermap.org/img/w/' + array[i].weather[0].icon + '.png');
-    //   dayIcon.setAttribute('alt', array[i].weather[0].description);
-    //   // dayMain.removeChild(dayIcon);
-    //   dayMain.appendChild(dayIcon);
-
-    //   var dayTemp = document.createElement('li');
-    //   dayTemp.textContent = array[i].temp.day + '°F';
-    //   // dayList.removeChild(dayTemp);
-    //   dayList.appendChild(dayTemp);
-
-    //   dayHumidity = document.createElement('li');
-    //   dayHumidity.textContent = 'Humidity: ' + array[i].humidity + '%';
-    //   // dayList.removeChild(dayHumidity);
-    //   dayList.appendChild(dayHumidity);
-
-
-    // }
   }
 }
 
