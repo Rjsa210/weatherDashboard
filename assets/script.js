@@ -1,7 +1,7 @@
 var cityNameEl = document.querySelector('#city-name-search');
 var searchForm = document.querySelector('#city-search');
 var currentWeatherEl = document.querySelector('#current-block');
-var forecastEl = document.querySelector('#forecast-block');
+var forecastEl = document.querySelector('#forecast-field');
 var apiKey = '53f33f9772ec66c7ccfbcf166501533a';
 
 //search function to make API call by city name, return data, and change variable values 
@@ -60,6 +60,8 @@ function getForecast(lat, lon) {
       if (response.ok) {
         response.json().then(function (data) {
           console.log(data);
+          var dailyForecast = data.daily;
+          renderForecast(dailyForecast);
 
           document.querySelector('#current-temp').textContent = 'Temperature: ' + data.current.temp + '°F';
           document.querySelector('#current-humidity').textContent = 'Humidity: ' + data.current.humidity + '%';
@@ -73,6 +75,33 @@ function getForecast(lat, lon) {
     .catch(function (error) {
       alert('unable to connect to Open Weather API');
     });
+}
+
+function renderForecast(array) {
+  for (var i = 0; i < 5; i++) {
+    var dayBlock = document.createElement('div');
+    dayBlock.className = 'col col-sm-12 col-md-6 col-lg-2';
+    forecastEl.appendChild(dayBlock);
+    var dayList = document.createElement('ul');
+    dayBlock.appendChild(dayList);
+    var dayDate= document.createElement('li');
+    dayDate.textContent = array[i].dt;
+    dayList.appendChild(dayDate);
+    var dayMain = document.createElement('li');
+    dayList.appendChild(dayMain);
+    var dayIcon = document.createElement('img');
+    dayIcon.setAttribute('src', 'http://openweathermap.org/img/w/' + array[i].weather[0].icon + '.png');
+    dayIcon.setAttribute('alt', array[i].weather[0].description);
+    dayMain.appendChild(dayIcon);
+    var dayTemp = document.createElement('li');
+    dayTemp.textContent = array[i].temp.day + '°F';
+    dayList.appendChild(dayTemp);
+    dayHumidity = document.createElement('li');
+    dayHumidity.textContent = 'Humidity: ' + array[i].humidity + '%';
+    dayList.appendChild(dayHumidity);
+
+    
+  }
 }
 //renderCities function to print city buttons below search bar
 // function storeCities(city) {
