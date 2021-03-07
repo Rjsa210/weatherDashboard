@@ -26,12 +26,11 @@
             <div class="col col-sm-12 col-md-12 col-lg-12 search-form">
               <form class="row g-3" id="city-search">
                 <div class="col-sm-2 col-md-2 col-lg-2">
-                  <label for="search-label" class="visually-hidden">Email</label>
                   <input type="text" readonly class="form-control-plaintext" id="search-label" value="City:">
                 </div>
                 <div class="col-sm-8 col-md-8 col-lg-8">
                   <label for="city-name-search" class="visually-hidden">City Name</label>
-                  <input type="text" class="form-control" id="city-name-search" placeholder="City Name">
+                  <input type="text" class="form-control form-input" id="city-name-search" autofocus="true" placeholder="City Name">
                 </div>
                 <div class="col-sm-2 col-md-2 col-lg-2">
                   <button type="submit" class="btn btn-primary mb-3">Search</button>
@@ -50,6 +49,23 @@
         <section class="city-forecast">
           <div class="row">
             <div class="col col-sm-12 col-md-12 col-lg-12" id="current-block">
+              <div class="row">
+                <div class="col col-sm-12 col-md-12 col-lg-12 ">
+                  <h1 id="city-date"></h1>
+                  <img id="wicon" src="" alt="">                
+                </div>
+              </div>
+              <div class="col col-sm-12 col-md-12 col-lg-12" id="current-block">
+                <div class="row">
+                  <div class="col col-sm-12 col-md-12 col-lg-12 ">
+                    <ul>
+                      <li id="current-temp"></li>
+                      <li id="current-humidity"></li>
+                      <li id="wind-speed"></li>
+                      <li id="UV-index"></li>
+                    </ul>             
+                  </div>
+                </div>
 
             </div>
           </div>
@@ -63,6 +79,7 @@
       </div>
     </div>
   </div>
+  <script src="./assets/script.js"></script>
 </body>
 
 </html>
