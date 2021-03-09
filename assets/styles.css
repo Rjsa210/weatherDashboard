@@ -1,19 +1,16 @@
 header {
   height: 100px;
+  font-size: 70px;
+  text-align: center;
+  background-color:tomato
 }
-body{
+
+body {
+  background-color: wheat;
 
 }
 .row {
-  border: dashed;
-  border-width: 2px;
-  border-color: chartreuse;
-}
-
-.col {
-border: dotted;
-border-width: 2px;
-border-color: fuchsia;
+  margin: 10px;
 }
 
 .aside,

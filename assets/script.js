@@ -2,25 +2,36 @@ var cityNameEl = document.querySelector('#city-name-search');
 var searchForm = document.querySelector('#city-search');
 var currentWeatherEl = document.querySelector('#current-block');
 var forecastEl = document.querySelector('#forecast-field');
+var buttonList = document.querySelector('#button-list');
+var cityList = [];
 var apiKey = '53f33f9772ec66c7ccfbcf166501533a';
 
 //search function to make API call by city name, return data, and change variable values 
 // alert if city name is not valid
+renderCities();
+
 function submitCity(event) {
   event.preventDefault();
   cityName = cityNameEl.value.trim();
   if (cityName) {
     getCurrentWeather(cityName);
+    cityList.unshift(cityName);
+    if (cityList.length > 5) {
+      cityList.pop();
+    }
+    console.log(cityList);
+    storeCities();
+    cityNameEl.value = '';
+
   }
 }
-
 
 searchForm.addEventListener('submit', submitCity);
 
 function getCurrentWeather(city) {
   console.log('It was rainy it was cold... West ' + city + ' was no place for a 12 year old.')
   var currentUrl = 'https://api.openweathermap.org/data/2.5/weather?q=' + city + '&units=imperial&appid=' + apiKey;
-  var forecastUrl = 'https://api.openweathermap.org/data/2.5/forecast/daily?q=' + city + '&mode=xml&units=imperial&cnt=5&appid=53f33f9772ec66c7ccfbcf166501533a';
+  
 
   fetch(currentUrl)
     .then(function (response) {
@@ -85,20 +96,40 @@ function renderForecast(array) {
 }
 
 
+//store cities function to push city to an array and store array in local storage
+function storeCities() {
+  localStorage.setItem('savedCities', JSON.stringify(cityList));
+ resetButtons();
 
-//renderCities function to print city buttons below search bar
-// function storeCities(city) {
-//   var cityList = [];
-//   cityList.push(city);
+}
+function resetButtons() {
+  buttonList.children[0].innerHTML = '';
+  buttonList.children[1].innerHTML = '';
+  buttonList.children[2].innerHTML = '';
+  buttonList.children[3].innerHTML = '';
+  buttonList.children[4].innerHTML = '';
+  renderCities();
+}
+function renderCities() {
+  var cityButtons = JSON.parse(localStorage.getItem('savedCities'));
+  if (cityButtons !== null) {
+    cityList = cityButtons;
+    console.log(cityButtons);
+    for (i = 0; i< cityButtons.length; i++) {
+      var newButton = document.createElement('button');
+      newButton.setAttribute('class', 'btn btn-primary');
+      newButton.textContent = cityButtons[i];
+      newButton.addEventListener('click', function(event){
+        getCurrentWeather(event.target.textContent);
+      });
+      buttonList.children[i].appendChild(newButton);
 
-//   for (var i = 0; i < cityList.length; i++) {
-//     var
+    }
 
-//   }
-// }
+    }
+  }
 
-//store cities function to store city to an array in local storage
-//rendercurrent function to print relevant information to the current block
+//renderCities function to pull array from storage and print city buttons below search bar
 
-//renderforecast function to print forcast to the forecast block assuming for loop if returned as array
+
 
